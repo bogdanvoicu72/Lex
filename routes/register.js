@@ -10,7 +10,7 @@ router.get('/', (req,res)=>{
 
 
 router.post('/', (req,res) =>{
-    axios.post('http://localhost:7000/Register',{
+    axios.post('https://api-lex-xrlwd.ondigitalocean.app/Register',{
         nume:req.body.nume,
         prenume:req.body.prenume,
         email:req.body.email,
