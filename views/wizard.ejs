@@ -21,6 +21,9 @@
         <script src="https://kit.fontawesome.com/c10f21a92b.js" crossorigin="anonymous"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+
+		
 
 		<script>
                 WebFont.load({
@@ -110,11 +113,15 @@
 															<div class="m-wizard__step-line">
 																<span></span>
 															</div>
+															
 															<div class="m-wizard__step-label">
 																Informatii petent
 															</div>
 														</div>
 													</div>
+
+												
+													
 													<div class="m-wizard__step" m-wizard-target="m_wizard_form_step_2">
 														<div class="m-wizard__step-info">
 															<a href="#" class="m-wizard__step-number">
@@ -192,51 +199,51 @@
 																	</div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Nume:</div>
-                                                                        <div class="col-xl-10"><b>{{ user.firstName }} {{ user.lastName }}</b></div>
+                                                                        <div class="col-xl-10"><b> <%= Nume %>  <%= Prenume %></b></div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Email:</div>
-                                                                        <div class="col-xl-10"><b>{{ user.email }}</b></div>
+                                                                        <div class="col-xl-10"><b><%= Email %></b></div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Serie CI:</div>
-                                                                        <div class="col-xl-10"><b>{{ user.ci.series }} {{ user.ci.number }}</b></div>
+                                                                        <div class="col-xl-10"><b><%= SerieCI %> <%= NumarCI %></b></div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Oras:</div>
-                                                                        <div class="col-xl-10"><b>{{ user.address.city }}</b></div>
+                                                                        <div class="col-xl-10"><b><%= Oras %></b></div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Strada:</div>
-                                                                        <div class="col-xl-10"><b>{{ user.address.street }}</b></div>
+                                                                        <div class="col-xl-10"><b><%= Strada %></b></div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Numar:</div>
-                                                                        <div class="col-xl-10"><b>{{ user.address.number }}</b></div>
+                                                                        <div class="col-xl-10"><b><%= Numar %></b></div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Bloc:</div>
-                                                                            <div class="col-xl-10"><b>{{ user.address.block }}</b></div>
+                                                                            <div class="col-xl-10"><b><%= Numar %></b></div>
                                                                             <div class="col-xl-10"><b>-</b></div>
 
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Scara:</div>
-                                                                            <div class="col-xl-10"><b>{{ user.address.stair }}</b></div>
+                                                                            <div class="col-xl-10"><b><%= Scara %></b></div>
                                                                             <div class="col-xl-10"><b>-</b></div>
                                                                       
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Apartament:</div>
-                                                                        {% if user.address.block %}
-                                                                            <div class="col-xl-10"><b>{{ user.address.apartment }}</b></div>
-                                                                        {% else %}
+                                                                      
+                                                                            <div class="col-xl-10"><b><%= Apartament %></b></div>
+                                                                       
                                                                             <div class="col-xl-10"><b>-</b></div>
-                                                                        {% endif %}
+                                                                       
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-2">Judet:</div>
-                                                                        <div class="col-xl-10"><b>{{ user.address.county }}</b></div>
+                                                                        <div class="col-xl-10"><b><%= Judet %></b></div>
                                                                     </div>
 																</div>
 																<div class="m-separator m-separator--dashed m-separator--lg"></div>
@@ -1020,6 +1027,44 @@ function addElements(){
 
 
 		</script>
+
+
+<script>
+	$("#get-users").submit(function(e){
+		let variabila;
+		e.preventDefault();
+
+		$.ajax({
+			url: "http://localhost:7000/User-info",
+			type: "GET",
+			data: {
+				email: 'test@gmail.com'
+			},
+			success: function(data){
+				console.log(data);
+				variabila = data;
+				for(const prop in variabila){
+				//	console.log(`${variabila[0]}`);
+					let nume = `${variabila[0]}`
+					let prenume = `${variabila[1]}`
+					let email = `${variabila[2]}`
+					let seriaCI = `${variabila[3]}`
+					let numarCI = `${variabila[4]}`
+					let oras = `${variabila[5]}`
+					let strada = `${variabila[6]}`
+					let numar = `${variabila[7]}`
+					let scara = `${variabila[8]}`
+					let Apartament = `${variabila[9]}`
+					let judet = `${variabila[10]}`
+
+					console.log(nume + " " + judet);
+				}
+			}
+		});
+
+		;
+	});
+</script>
 
 
 	</body>
